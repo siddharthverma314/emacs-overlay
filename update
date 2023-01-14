@@ -1,6 +1,10 @@
 #!/usr/bin/env nix-shell
 #! nix-shell -i bash -p bash git
 
+# update flake
+nix flake update
+
+# update repos
 for repo in repos/*; do
     $repo/update && (git diff --exit-code $repo > /dev/null || git commit -m "Updated $repo" -- $repo)
 done
